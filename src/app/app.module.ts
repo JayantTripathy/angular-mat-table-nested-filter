@@ -7,9 +7,13 @@ import { MatTableFilterComponent } from './mat-table-filter/mat-table-filter.com
 import { MaterialComponentsModule } from './material-components/material-components.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatExpansionModule } from '@angular/material/expansion';
-
+import { MatTableFilterDetailsComponent } from '././mat-table-filter/mat-table-filter-details/mat-table-filter.component';
 @NgModule({
-  declarations: [AppComponent, MatTableFilterComponent],
+  declarations: [
+    AppComponent,
+    MatTableFilterComponent,
+    MatTableFilterDetailsComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -19,5 +23,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
   ],
   providers: [],
   bootstrap: [AppComponent],
+  export: [MatTableFilterDetailsComponent],
 })
 export class AppModule {}
