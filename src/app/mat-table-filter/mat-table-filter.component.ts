@@ -10,15 +10,7 @@ import { MatSelectChange } from '@angular/material/select';
   styleUrls: ['./mat-table-filter.component.scss'],
 })
 export class MatTableFilterComponent implements OnInit {
-  displayedColumns: string[] = [
-    'id',
-    'firstname',
-    //'lastname',
-    //'email',
-    'gender',
-    'jobtitle',
-    //'department',
-  ];
+  displayedColumns: string[] = ['id', 'firstname', 'gender', 'jobtitle'];
 
   EmpData: Employee[] = [
     {
@@ -36,7 +28,7 @@ export class MatTableFilterComponent implements OnInit {
       firstname: 'Yehudi',
       lastname: 'Ainsby',
       email: 'yainsby1@w3.org',
-      gender: 'Female',
+      gender: 'Male',
       department: 'Support',
       jobtitle: 'Support Analyst',
       empBill: [{ name: 'abc-2', billStatus: 'Unpaid', billAmount: 300 }],
@@ -46,7 +38,7 @@ export class MatTableFilterComponent implements OnInit {
       firstname: 'Noellyn',
       lastname: 'Primett',
       email: 'nprimett2@ning.com',
-      gender: 'Female',
+      gender: 'Male',
       department: 'Human Resources',
       jobtitle: 'Project Manager',
       empBill: [{ name: 'abc-3', billStatus: 'Paid', billAmount: 300 }],
@@ -120,5 +112,10 @@ export class MatTableFilterComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  expandedRows: { [key: number]: boolean } = {};
+
+  expand(element: Employee) {
+    this.expandedRows[element.id] = !this.expandedRows[element.id];
   }
 }
