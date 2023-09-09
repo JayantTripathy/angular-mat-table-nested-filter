@@ -123,6 +123,8 @@ export class MatTableFilterComponent implements OnInit {
     //console.log(this.filterValues);
   }
   applyEmpFilter1(ob: MatSelectChange, empfilter: EmpFilter) {
+    alert(empfilter.name);
+    alert(ob.value);
     this.filterDictionary.set(empfilter.name, ob.value);
 
     var jsonString = JSON.stringify(
