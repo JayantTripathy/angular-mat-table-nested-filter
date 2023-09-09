@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Employee } from '../model/employee';
+import { Employee, IBillingInfo } from '../model/employee';
 import { EmpFilter, filterOption } from '../model/empfilter';
 import { MatSelectChange } from '@angular/material/select';
 import { TestService } from '../test.service';
@@ -73,8 +73,10 @@ export class MatTableFilterComponent implements OnInit {
   ];
 
   genders: string[] = ['All', 'Male', 'Female'];
+  billstatus: string[] = ['None', 'Paid', 'Unpaid'];
 
   empFilters: EmpFilter[] = [];
+  billFilters: EmpFilter[] = [];
 
   defaultValue = 'All';
   defaultValue1 = 'none';
@@ -83,13 +85,18 @@ export class MatTableFilterComponent implements OnInit {
   dataSource = new MatTableDataSource(this.EmpData);
   dataSourceFilters = new MatTableDataSource(this.EmpData);
 
-  constructor(public testservice: TestService) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.empFilters.push({
       name: 'gender',
       options: this.genders,
       defaultValue: this.defaultValue,
+    });
+    this.billFilters.push({
+      name: 'billstatus',
+      options: this.billstatus,
+      defaultValue: this.defaultValue1,
     });
 
     this.dataSourceFilters.filterPredicate = function (record, filter) {
@@ -115,13 +122,23 @@ export class MatTableFilterComponent implements OnInit {
     this.dataSourceFilters.filter = jsonString;
     //console.log(this.filterValues);
   }
+  applyEmpFilter1(ob: MatSelectChange, empfilter: EmpFilter) {
+    this.filterDictionary.set(empfilter.name, ob.value);
+
+    var jsonString = JSON.stringify(
+      Array.from(this.filterDictionary.entries())
+    );
+
+    this.dataSourceFilters.filter = jsonString;
+    //console.log(this.filterValues);
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   changed(value: any) {
-    this.testservice.next(value);
+    //this.testservice.setBillStatus(value);
   }
   expandedRows: { [key: number]: boolean } = {};
 

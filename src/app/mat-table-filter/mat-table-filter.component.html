@@ -12,19 +12,31 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field>
+<mat-form-field appearance="fill" *ngFor="let empfilter of billFilters">
+  <mat-label>{{ empfilter.name }}</mat-label>
+  <mat-select
+    [(value)]="empfilter.defaultValue"
+    (selectionChange)="applyEmpFilter1($event, empfilter)"
+  >
+    <mat-option *ngFor="let op of empfilter.options" [value]="op">
+      {{ op }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<!-- <mat-form-field>
   <mat-label>Bill Status</mat-label>
   <select
     matNativeControl
     required
     [(value)]="defaultValue1"
-    (change)="changed(sel.value)"
+    (change)="changed($event)"
   >
     <option value="none">None</option>
     <option value="paid">Paid</option>
     <option value="unpaid">Unpaid</option>
   </select>
-</mat-form-field>
+</mat-form-field> -->
 
 <br />
 
