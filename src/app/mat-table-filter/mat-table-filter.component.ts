@@ -10,7 +10,7 @@ import { MatSelectChange } from '@angular/material/select';
   styleUrls: ['./mat-table-filter.component.scss'],
 })
 export class MatTableFilterComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'firstname', 'gender', 'jobtitle'];
+  displayedColumns: string[] = ['id', 'firstname', 'gender'];
 
   EmpData: Employee[] = [
     {
@@ -21,7 +21,14 @@ export class MatTableFilterComponent implements OnInit {
       gender: 'Female',
       department: 'Support',
       jobtitle: 'Support Analyst',
-      empBill: [{ name: 'abc-1', billStatus: 'Paid', billAmount: 300 }],
+      empBill: [
+        { name: 'abc-1', billStatus: 'Paid', billAmount: 300 },
+        { name: 'abc-2', billStatus: 'Unpaid', billAmount: 300 },
+        { name: 'abc-3', billStatus: 'Paid', billAmount: 300 },
+        { name: 'abc-4', billStatus: 'Unpaid', billAmount: 300 },
+        { name: 'abc-5', billStatus: 'Paid', billAmount: 300 },
+        { name: 'abc-6', billStatus: 'Unpaid', billAmount: 300 },
+      ],
     },
     {
       id: 2,

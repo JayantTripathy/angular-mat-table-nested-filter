@@ -12,6 +12,15 @@
   </mat-select>
 </mat-form-field>
 
+<mat-form-field>
+  <mat-label>Bill Status</mat-label>
+  <select matNativeControl required>
+    <option value="none">None</option>
+    <option value="paid">Paid</option>
+    <option value="unpaid">Unpaid</option>
+  </select>
+</mat-form-field>
+
 <br />
 
 <table mat-table [dataSource]="dataSourceFilters" class="mat-elevation-z8">
@@ -30,7 +39,12 @@
         <mat-expansion-panel-header>
           {{ element.id }}
         </mat-expansion-panel-header>
-        <div *ngFor="let child of element.empBill">{{ child.name }}</div>
+
+        <app-mat-table-filter-details
+          [billingInfo]="element?.empBill"
+        ></app-mat-table-filter-details>
+
+        <!-- <div *ngFor="let child of element.empBill">{{ child.name }}</div> -->
       </mat-expansion-panel>
     </td>
   </ng-container>
@@ -38,24 +52,7 @@
   <!-- Name Column -->
   <ng-container matColumnDef="firstname">
     <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let element">
-      <mat-expansion-panel
-        hideToggle
-        [expanded]="expandedRows[element.position]"
-        (click)="expand(element)"
-      >
-        <mat-expansion-panel-header>
-          {{ element.firstname }}
-        </mat-expansion-panel-header>
-        <div *ngFor="let child of element.children">{{ child.billStatus }}</div>
-      </mat-expansion-panel>
-    </td>
-  </ng-container>
-
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="jobtitle">
-    <th mat-header-cell *matHeaderCellDef>Symbol</th>
-    <td mat-cell *matCellDef="let element">{{ element.jobtitle }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.firstname }}</td>
   </ng-container>
 
   <ng-container matColumnDef="gender">
