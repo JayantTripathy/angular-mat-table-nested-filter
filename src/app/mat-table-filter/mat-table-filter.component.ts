@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Employee } from '../model/employee';
 import { EmpFilter, filterOption } from '../model/empfilter';
 import { MatSelectChange } from '@angular/material/select';
-
+import { TestService } from '../test.service';
 @Component({
   selector: 'app-mat-table-filter',
   templateUrl: './mat-table-filter.component.html',
@@ -77,13 +77,13 @@ export class MatTableFilterComponent implements OnInit {
   empFilters: EmpFilter[] = [];
 
   defaultValue = 'All';
-
+  defaultValue1 = 'none';
   filterDictionary = new Map<string, string>();
 
   dataSource = new MatTableDataSource(this.EmpData);
   dataSourceFilters = new MatTableDataSource(this.EmpData);
 
-  constructor() {}
+  constructor(public testservice: TestService) {}
 
   ngOnInit(): void {
     this.empFilters.push({
@@ -119,6 +119,9 @@ export class MatTableFilterComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  changed(value: any) {
+    this.testservice.next(value);
   }
   expandedRows: { [key: number]: boolean } = {};
 
